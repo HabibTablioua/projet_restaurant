@@ -150,19 +150,19 @@ if (isset($_SESSION['username'])) {
         <div class="row">
           <div class="col">
             <span>Current password</span>
-            <input type="text" class="form-control" name="oldpassw" id="oldpassw" required>
+            <input type="password" class="form-control" name="oldpassw" id="oldpassw" required>
           </div>
         </div>  
         <div class="row">
           <div class="col">
             <span>New password</span>
-            <input type="text" class="form-control" name="passw" id="passw" required>
+            <input type="password" class="form-control" name="passw" id="passw" required>
           </div>
         </div>  
         <div class="row">
           <div class="col">
             <span>Re-type new password</span>
-            <input type="text" class="form-control" name="passtwo" id="passtwo" required>
+            <input type="password" class="form-control" name="passtwo" id="passtwo" required>
           </div>
         </div>
         </div>

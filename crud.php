@@ -9,6 +9,7 @@ require 'includes/PHPMailer.php';
 require 'includes/SMTP.php';
 require 'includes/Exception.php';
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -1463,15 +1464,15 @@ if (isset($_POST['frmsignup'])) {
      $email = mysqli_real_escape_string($conn, $_POST['email']);
      $pass = mysqli_real_escape_string($conn, $_POST['pass']);
      $com_pass= mysqli_real_escape_string($conn, $_POST['Cpass']);
-     $adresse= mysqli_real_escape_string($conn, $_POST['adresse']);
-     $telephone= mysqli_real_escape_string($conn, $_POST['telephone']);
+     //$adresse= mysqli_real_escape_string($conn, $_POST['adresse']);
+     //$telephone= mysqli_real_escape_string($conn, $_POST['telephone']);
      $role='client';
 
      $sqlm = "SELECT * From user Where email='$email'";
      $ressm = mysqli_query($conn ,$sqlm);
 
-     $sqlt = "SELECT * From user Where telephone= $telephone";
-     $resst = mysqli_query($conn ,$sqlt);
+     //$sqlt = "SELECT * From user Where telephone= $telephone";
+     //$resst = mysqli_query($conn ,$sqlt);
      
 	if($pass != $com_pass){
         $res = [
@@ -1488,14 +1489,14 @@ if (isset($_POST['frmsignup'])) {
             echo json_encode($res);
             return false;
     }
-    else if(mysqli_num_rows($resst)>=1){
+    /*else if(mysqli_num_rows($resst)>=1){
         $res = [
             'status' => 12,
             'message' => 'The phone number is taken try another one !'
             ];
             echo json_encode($res);
             return false;
-    }
+    }*/
     else{
         $sql = "SELECT * From user Where nom='$username' and  prenom='$prenom' ";
         $ress= mysqli_query($conn ,$sql);
@@ -1508,14 +1509,14 @@ if (isset($_POST['frmsignup'])) {
                 echo json_encode($res);
                 return false;
         } 
-        else if(strlen($telephone) < 10){
+        /*else if(strlen($telephone) < 10){
             $res = [
                 'status' => 12,
                 'message' => 'The phone number is less than 10 !'
                 ];
                 echo json_encode($res);
                 return false;
-        }
+        }*/
         else if(strlen($pass) < 8){
             $res = [
                 'status' => 12,
@@ -1531,9 +1532,9 @@ if (isset($_POST['frmsignup'])) {
             $ecc = 'L';
             $pixel_Size = 20;
             $frame_Size = 10;
-            //$getmid = mysqli_query($conn, "SELECT MAX(id) as maxid FROM `user`");
-            //$maxid = mysqli_fetch_assoc($getmid);
-            //$id = $maxid['maxid'] + 1;
+            $getmid = mysqli_query($conn, "SELECT MAX(id) as maxid FROM `user`");
+            $maxid = mysqli_fetch_assoc($getmid);
+            $id = $maxid['maxid'] + 1;
 
             $long_key = 15;
             $key = "";
@@ -1541,21 +1542,15 @@ if (isset($_POST['frmsignup'])) {
                 $key .= mt_rand(0,9);
             }
 
-          $query ="INSERT INTO user(nom,prenom,email,password,role,adresse,telephone,qrImage,confirmkey)VALUES ('$username','$prenom','$email','$pass','$role','$adresse',$telephone,'$file','$key')";
+          $query ="INSERT INTO user(nom,prenom,email,password,role,qrImage,confirmkey)VALUES ('$username','$prenom','$email','$pass','$role','$file','$key')";
           $Resultat= mysqli_query($conn ,$query);
           if($Resultat){
-            $qur = mysqli_query($conn, "SELECT id FROM user WHERE nom = '$username' And prenom = '$prenom'");
-            $idu = mysqli_fetch_assoc($qur);
-            $id = $idu['id'];
-            $lfnameid = $id.$prenom.$username;
-            QRcode::png($lfnameid,$file,$ecc,$pixel_Size,$frame_Size);
-
-            //mail
             $mail = new PHPMailer();
             $mail->isSMTP();
             $mail->Host = "smtp.gmail.com";
-            $mail->SMTPAuth = "true";
+            $mail->SMTPAuth = true;
             $mail->SMTPSecure = "tls";
+            $mail->CharSet="UTF-8";
             $mail->Port = "587";
             $mail->Username = "resto12cool@gmail.com";
             $mail->Password = "rfteblflzrxnhllo";
@@ -1563,7 +1558,7 @@ if (isset($_POST['frmsignup'])) {
             $mail->setFrom("resto12cool@gmail.com");
             $mail->isHTML(true);
             $mail->Body="<div>
-                <p>Your vérification code : <b>".$key."</b></p>
+                <p>Your vérification code : <b>. $key .</b></p>
             </div>";
             $mail->addAddress($email);
             $mail->send();
@@ -1571,10 +1566,26 @@ if (isset($_POST['frmsignup'])) {
 
             $res = [
                 'status' => 11,
-                'message' => 'You will receive a confirmation email ('.$email.')'//Your account has been created successfully
+                'message' => 'Your account has been created successfully'//Your account has been created successfully
                 ];
                 echo json_encode($res);
                 return false;
+            /*$qur = mysqli_query($conn, "SELECT id FROM user WHERE nom = '$username' And prenom = '$prenom'");
+            $idu = mysqli_fetch_assoc($qur);
+            $id = $idu['id'];
+            $lfnameid = $id.$prenom.$username;
+            QRcode::png($lfnameid,$file,$ecc,$pixel_Size,$frame_Size);*/
+
+            
+            
+            //Your account has been created successfully
+            $res = [
+                'status' => 11,
+                'message' => 'You will receive a confirmation email ('.$email.')'
+                ];
+                echo json_encode($res);
+                return false; 
+      
           }else{
            // header("Location:index.php?error=unknown error occurred&$user_data");
            $res = [
@@ -1584,6 +1595,7 @@ if (isset($_POST['frmsignup'])) {
             echo json_encode($res);
             return false;
           }
+        
         }
 
     }
@@ -1614,9 +1626,6 @@ if (isset($_POST['frmconf'])) {
             echo json_encode($res);
             return false;
     }
-    
-
-
 }
 
 if (isset($_POST['frmsendcont'])) {

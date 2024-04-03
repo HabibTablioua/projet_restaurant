@@ -209,7 +209,7 @@ $fetch_info = mysqli_fetch_assoc($select_info);
             <option value="" selected disabled>type de paiement </option>
             <option value="Paypal">Paypal</option>
           </select>-->
-          <span>Number Peopel </span>
+          <span>Number of persons</span>
           <input type="number" class="form-control" name="people" id="people" placeholder="# of people" data-rule="minlen:1" min="1" required>
           <div class="validate"></div>
         </div>
@@ -222,12 +222,7 @@ $fetch_info = mysqli_fetch_assoc($select_info);
         </div>
         <div class="col">
           <span>Minute</span>
-          <!--<input type="number" class="form-control" name="minute"  placeholder="Minute"   min=0 max=59 required >-->
-          <select name="minute" id="" class="form-control">
-            <option value="" selected disabled>Minute</option>
-            <option value="00">00</option>
-            <option value="30">30</option>
-          </select>
+          <input type="number" class="form-control" name="minute"  placeholder="Minute"  min=0 max=59 required >
         </div>
       </div>
       <div class="row">
@@ -245,9 +240,8 @@ $fetch_info = mysqli_fetch_assoc($select_info);
           <select name="purp" id="purp" class="form-control">
             <option value="" selected disabled>Chose...</option>
             <option value="Casual">Casual</option>
-            <option value="Meeting">Meeting</option>
+            <option value="Meeting">birthday</option>
             <option value="Family">Family</option>
-            <option value="Celebration">Celebration</option>
           </select>
         </div>
       </div>

@@ -12,8 +12,8 @@ $name = $_SESSION['username'];
   $_SESSION['radio'] = $rd;
   header('location:table.php');
 }*/
-//if(isset($_POST['submit'])){
-//$_SESSION['radio'] = $_POST['vradio'];}
+if(isset($_POST['submit'])){
+$_SESSION['radio'] = $_POST['vradio'];}
 ?>
 
 <!DOCTYPE html>

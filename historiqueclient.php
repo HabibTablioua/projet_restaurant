@@ -135,7 +135,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['pass'])) {
             </thead>
             <tbody class="text-center">
               <?php
-              $select_meal = mysqli_query($conn, "SELECT * FROM `order` WHERE id = '$id_user' AND condord = 'show' ORDER BY date_auj");
+              $select_meal = mysqli_query($conn, "SELECT * FROM `order` WHERE id = '$id_user' AND condord = 'show' ORDER BY date_auj desc");
               if (mysqli_num_rows($select_meal) > 0) {
                 while ($fetch_meal = mysqli_fetch_assoc($select_meal)) {
               ?>
@@ -175,7 +175,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['pass'])) {
             </thead>
             <tbody class="text-center">
               <?php
-              $select_restab = mysqli_query($conn, "SELECT * FROM reservationt WHERE id_user = $id_user AND condition_res = 'show' ORDER BY 	date_res");
+              $select_restab = mysqli_query($conn, "SELECT * FROM reservationt WHERE id_user = $id_user AND condition_res = 'show' ORDER BY 	date_res ");
               if (mysqli_num_rows($select_restab) > 0) {
                 while ($fetch_tab = mysqli_fetch_assoc($select_restab)) {
               ?>

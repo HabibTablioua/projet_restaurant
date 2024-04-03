@@ -86,7 +86,7 @@
               </a>
               <div class="actual-form" style="margin-top: -40%;">
                <!-- <input type="hidden" value="">-->
-               <h4>Check your mail, </h4><br><!--You will receive a confirmation email -->
+               <h4>Check your mail</h4><br><!--You will receive a confirmation email -->
                 <div class="input-wrap">
                 <input
                     type="number"

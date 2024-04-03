@@ -103,8 +103,8 @@ $mailuser = $sqlem['email'];
           <h2>Delivering great food for more than 18 years!</h2>
 
           <div class="btns">
-            <a href="menu.php" class="btn-menu animated fadeInUp scrollto">Delivery</a>
-            <a href="book-table-rad.php" class="btn-book animated fadeInUp scrollto">BOOK A TABLE</a>
+            <a href="menu.php" class="btn-menu animated fadeInUp scrollto">reserve Dish</a>
+            <a href="book-table-rad.php" class="btn-book animated fadeInUp scrollto">Reserve Table</a>
           </div>
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">

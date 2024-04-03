@@ -248,22 +248,19 @@ $fetch_info = mysqli_fetch_assoc($select_info);
         };
       ?>
         <tr id="shippingcost">
-          <td>Shipping Cost</td>
           <th></th>
           <th></th>
-          <td>-</td>
-          <td><?php echo $shippingc ?> DH</td>
+          <td></td>
         </tr>
         <tr id="lastch">
           <td></td>
           <th></th>
           <th></th>
-          <td colspan="2" id="totalapayer"><b>SUBTOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $total + $shippingc; ?> DH</b></td>
+          <td colspan="2" id="totalapayer"><b>SUBTOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $total; ?> DH</b></td>
         </tr>
       </tbody>
     </table>
-    <h4 style="font-size: 1rem;float: left;"><b>PAYMENT METHOD</b> : <i class="fa-brands fa-paypal"></i> PayPal</h4> 
-    <h2 class="phonenb" style="font-size: 1rem;float: right;margin-top: -5.5%;"><i class="fa-solid fa-phone"></i>+212514523654</h2>
+   
     <h2 class="phonenb" style="font-size: 1rem;float: right;margin-top: 1.5%;"><i class="fa-solid fa-phone"></i>+2125192001120</h2>
     <br>
     <br>

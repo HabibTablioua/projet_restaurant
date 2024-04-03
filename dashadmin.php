@@ -213,9 +213,7 @@ array_push($income, $revt6);
                         <li>
                             <a href="#" id="btn3"><span class="las la-user"></span><span>Waiter</span></a>
                         </li>
-                        <li>
-                            <a href="#" id="btn4"><i class="fa-solid fa-address-card" style="margin-top: 1%;"></i><span style="margin-left: 10%;"> Contact</span></a>
-                        </li>
+                       
                     </ul>
                 </li>
                 <li class="deconnecter">
@@ -255,7 +253,7 @@ array_push($income, $revt6);
                     <div class="card-single" id="clientToday" style="cursor: pointer;">
                         <div>
                             <h1><?php echo $nbp; ?></h1>
-                            <span>Clients</span>
+                            <span>Customers</span>
                         </div>
                         <div>
                             <span class="las la-users"></span>
@@ -269,7 +267,7 @@ array_push($income, $revt6);
                     <div class="card-single" id="tablerestoday" style="cursor: pointer;">
                         <div>
                             <h1><?php echo $nbt; ?></h1>
-                            <span>Table Reservations</span>
+                            <span>Tables</span>
                         </div>
                         <div>
                             <span class="las la-clipboard-list"></span>
@@ -312,14 +310,13 @@ array_push($income, $revt6);
                 <div class="cardd">
                     <div class="Projects">
                         <div class="card-header">
-                            <h3>Clients</h3>
+                            <h3>Customers</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                             <table width="100%" id="tabcustomer"> 
                                 <thead>
                                 <tr>
-                                    <td>QR Code</td>
                                     <td>First name</td>
                                     <td>Last name</td>
                                     <td>Email</td>
@@ -365,7 +362,7 @@ array_push($income, $revt6);
                 <div class="cardd">
                     <div class="Projects">
                         <div class="card-header">
-                            <h3>Table Reservations</h3>
+                            <h3>Tables have been reserved</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -375,7 +372,7 @@ array_push($income, $revt6);
                                     <td>Client</td>
                                     <td>Date</td>
                                     <td>Time</td>
-                                    <td>Nombre of People</td>
+                                    <td>Numbre of persons</td>
                                     <td>Purpose</td>
                                     <td>Location</td>
                                     <td>Table</td>
@@ -485,54 +482,7 @@ array_push($income, $revt6);
             <div class="recent-grid">
                 <div class="cardd">
                     <div class="Projects">
-                        <div class="card-header">
-                            <h3>Waiter Ordres</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                            <table width="100%" id="tabcustomer"> 
-                                <thead>
-                                <tr>
-                                    <td>Hour</td>
-                                    <td>Waiter</td>
-                                    <td>Table</td>
-                                    <td>Nb Person</td>
-                                    <td>Meals</td>
-                                    <td>Total</td>
-                                    <td>Payement</td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                    <tbody>
-                                    <?php 
-                                        $selectorder = mysqli_query($conn,"SELECT * FROM `teblecomm` WHERE date_c = CURRENT_DATE()");
-                                        if(mysqli_num_rows($selectorder) > 0){
-                                            foreach($selectorder as $order)
-                                            {
-                                                ?>
-                                        <tr>
-                                            <td><?= $order['heure'] ?></td>
-                                            <?php
-                                            $iduser = $order['id_us'];
-                                            $req = "SELECT nom,prenom FROM user where id = $iduser";
-                                            $nomuser = mysqli_query($conn, $req);
-                                            $nomprenom = mysqli_fetch_array($nomuser);
-                                            ?>
-                                            <td><?php echo $nomprenom['nom'].' '.$nomprenom['prenom'];?></td>
-                                            <td><?= 'Tab'.$order['id_table'] ?></td>
-                                            <td><?= $order['nb_pers'] ?></td>
-                                            <td><?= $order['meal_q'] ?></td>
-                                            <td><?= $order['total'].' DH'; ?></td>
-                                            <td><?= $order['type_paim'] ?></td>
-                                        </tr>
-                                        <?php
-                                            }
-                                        }
-                                        ?>  
-                                    </tbody>
-                            </table>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div> 
             </div>
@@ -638,7 +588,7 @@ array_push($income, $revt6);
                                     <td>Client</td>
                                     <td>Date</td>
                                     <td>Time</td>
-                                    <td>Nombre of People</td>
+                                    <td>number of persons</td>
                                     <td>Purpose</td>
                                     <td>Location</td>
                                     <td>Table</td>
@@ -647,7 +597,7 @@ array_push($income, $revt6);
                                 </thead>
                                 <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM reservationt";
+                                    $query = "SELECT * FROM reservationt order by date_res desc";
                                     $select_tab = mysqli_query($conn, $query);
                                     if(mysqli_num_rows($select_tab) > 0){
                                         foreach($select_tab as $table)
@@ -728,7 +678,7 @@ array_push($income, $revt6);
                                     </thead>
                                         <tbody>
                                         <?php 
-                                            $selectorder = mysqli_query($conn,"SELECT * FROM `order`");
+                                            $selectorder = mysqli_query($conn,"SELECT * FROM `order` order by date_auj");
                                             if(mysqli_num_rows($selectorder) > 0){
                                                 foreach($selectorder as $order)
                                                 {
@@ -834,12 +784,12 @@ array_push($income, $revt6);
             <!--Gest compte client-->
 
             <div id="compteClient">
-            <h1 style="margin-top:1%;display: flex;justify-content: center;">Customer Account Management</h1>
+            <h1 style="margin-top:1%;display: flex;justify-content: center;">Customers Account Management</h1>
             <div class="recent-grid" id="F2">
-                <div class="cardd">
+                <div class="cardd"> 
                     <div class="Projects">
                         <div class="card-header">
-                            <h3>customer's</h3>
+                            <h3>customers</h3>
                             <div class="buttons"><button class="cta-01" id="deleteallcustomers"><span><i class="fas fa-trash"></i> Delete All</span></button></div>
                         </div>
                         <div class="card-body">
@@ -847,26 +797,23 @@ array_push($income, $revt6);
                             <table width="100%" id="tabcustomer"> 
                                 <thead>
                                 <tr>
-                                    <td>QR Code</td>
                                     <td>First name</td>
                                     <td>Last name</td>
                                     <td>Email</td>
                                     <td>Password</td>
                                     <td>Adresse</td>
                                     <td>Phone</td>
-                                    <td></td>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php 
-                                    $query = "SELECT * FROM user where role = 'client'";
+                                    $query = "SELECT * FROM user where role = 'client' order by date_aujaurd  desc";
                                     $select_clt = mysqli_query($conn, $query);
                                     if(mysqli_num_rows($select_clt) > 0){
                                         foreach($select_clt as $client)
                                         {
                                             ?>
                                     <tr>
-                                        <td><img src="<?= $client['qrImage']; ?>" width="70" style="border-radius: 5px;height:100%;"></td>
                                         <td><?= $client['nom'] ?></td>
                                         <td><?= $client['prenom'] ?></td>
                                         <td><?= $client['email'] ?></td>
@@ -874,7 +821,6 @@ array_push($income, $revt6);
                                         <td><?= $client['adresse'] ?></td>
                                         <td><?= $client['telephone'] ?></td>
                                         <td>
-                                            <div class="buttons"><button class="cta-02" id="sendQRCustomer" style="margin-top: 11%;" value="<?= $client['id'];?>"><span><i class="fa-solid fa-qrcode"></i> Send QRcode </span></button></div>
                                             <div class="buttons"><button class="cta-02" id="deleteCustomer" style="margin-top: 13%;" value="<?= $client['id'];?>"><span><i class="fas fa-trash"></i> Delete</span></button></div>
                                         </td>
                                     </tr>
@@ -900,7 +846,7 @@ array_push($income, $revt6);
                     <form id="addtable">
                         <table id="addtt">
                             <tr>
-                                <td><label>Type of Table</label></td>
+                                <td><label>Nombre de personnes</label></td>
                                 <td>
                                     <!--<select name="typetable" required>
                                     <option selected disabled value="">Choose...</option>
@@ -1024,7 +970,7 @@ array_push($income, $revt6);
                                 <thead>
                                 <tr>
                                     <td>Id Table</td>
-                                    <td>Type of Table</td>
+                                    <td>Nombre de personnes</td>
                                   <!--  <td>Disponible</td>-->
                                     <td>Purpose</td>
                                     <td>Emplacement</td>
@@ -1252,7 +1198,7 @@ array_push($income, $revt6);
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $select_meal = mysqli_query($conn, "SELECT * FROM plat");
+                                        $select_meal = mysqli_query($conn, "SELECT * FROM plat order by code_plat");
                                         if(mysqli_num_rows($select_meal) > 0){
                                         while($fetch_meal = mysqli_fetch_assoc($select_meal)){
                                     ?>
@@ -1478,44 +1424,7 @@ array_push($income, $revt6);
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            <table width="100%" id="tbwaiter"> 
-                                <thead>
-                                <tr>
-                                    <td>Customer</td>
-                                    <td>Subject</td>
-                                    <td>Message</td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <?php 
-                                    $query = "SELECT * FROM contactus";
-                                    $select_wai = mysqli_query($conn, $query);
-                                    if(mysqli_num_rows($select_wai) > 0){
-                                        foreach($select_wai as $waiter)
-                                        {
-                                            ?>
-                                            <tr>
-                                                <?php
-                                                $iduss = $waiter['idus'];
-                                                $sql = mysqli_query($conn, "select nom,prenom from user where id = $iduss");
-                                                $nomp = mysqli_fetch_array($sql);
-                                                $nom = $nomp['nom'];
-                                                $prenom = $nomp['prenom'];
-                                                ?>
-                                                <td><?= $nom.' '.$prenom; ?></td>
-                                                <td><?= $waiter['subject'] ?></td>                                   
-                                                <td><?= $waiter['message'] ?></td>                                    
-                                                <td>
-                                                    <div class="buttons"><button class="cta-02" id="deleteContactBtn" value="<?= $waiter['id'];?>"><span><i class="fas fa-trash"></i> Delete</span></button></div>
-                                                </td>
-                                            </tr>  
-                                            <?php
-                                        }
-                                    }
-                                    ?>  
-                                </tbody>
-                            </table>
+                            
                             </div>
                         </div>
                     </div>
@@ -1698,7 +1607,7 @@ array_push($income, $revt6);
                                 <table>
                                     <input type="hidden" name="tab_idm" id="tab_idm">
                                             <tr>
-                                                <td><label>Type of table</label></td>
+                                                <td><label>Nombre de personnes</label></td>
                                                 <td>
                                                     <select name="ttable" style="width: 200px;" required>
                                                         <option selected disabled value="">Choose...</option>
